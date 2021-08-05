@@ -1,0 +1,27 @@
+install.packages("labdsv")
+
+install.packages("CCA")     # fun??????es da analise canonica
+install.packages("GGally")    # plotar graficos de correla??????o multipla
+install.packages("CCP")      #facilitates checking the significance of the canonical variates
+
+
+library(labdsv)
+library(vegan)      # ANALISE DE CORREPONDENCIA CANONICA (permite biplot) "cca" E N???O "cc" (correla??????o can???nica)
+library(CCA)
+library(ggplot2)
+library(GGally)
+library(CCP)
+
+#read file
+
+df<-read.csv2("name.csv", sep=';')
+
+
+sp <- df[, 2:14]   ## select var matriz 1 - animal/sp
+env <- df[, 15:18]    ## seleciona var - environmental
+
+#Using vegan package
+cca <- cca(sp, env)
+cca
+
+plot(cca, var.label = TRUE, ind.names = df[,1])
